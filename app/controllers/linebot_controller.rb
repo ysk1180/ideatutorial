@@ -1,36 +1,42 @@
 class LinebotController < ApplicationController
-  require 'line/bot'  # gem 'line-bot-api'
-
+  require 'line/bot'
   # callbackアクションのCSRFトークン認証を無効
   protect_from_forgery :except => [:callback]
-
   def callback
     body = request.body.read
-
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
       error 400 do 'Bad Request' end
     end
-
     events = client.parse_events_from(body)
-
     events.each { |event|
       case event
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          seed1 = select_word
-          seed2 = select_word
-          while seed1 == seed2
+          if event.message['text'] == "a"
             seed2 = select_word
+            message = [{
+              type: 'text',
+              text: "そのキーワードなかなかいいね〜"
+            },{
+              type: 'text',
+              text: "#{event.message['text']} × #{seed2} !!"
+            }]
+          else
+            seed1 = select_word
+            seed2 = select_word
+            while seed1 == seed2
+              seed2 = select_word
+            end
+            message = [{
+              type: 'text',
+              text: "キーワード何にしようかな〜〜"
+            },{
+              type: 'text',
+              text: "#{seed1} × #{seed2} !!"
+            }]
           end
-          message = [{
-            type: 'text',
-            text: "キーワード何にしようかな〜〜"
-          },{
-            type: 'text',
-            text: "#{seed1} × #{seed2} !!"
-          }]
           client.reply_message(event['replyToken'], message)
         end
       end

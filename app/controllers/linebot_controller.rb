@@ -14,7 +14,7 @@ class LinebotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          keyword = event.message['text'].match(/.*「(.+)」.*/)[1]
+          keyword = (event.message['text'].match(/.*「(.+)」.*/))[1]
           if  keyword.present?
             seed2 = select_word
             message = [{

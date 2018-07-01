@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 説明
+このリポジトリはアイデアTweetを簡単に作れる技術チュートリアル用のリポジトリです。  
 
-Things you may want to cover:
+## 技術チュートリアル
+LINE botチュートリアル【初学者向け】 〜Ruby on Railsでアイデアtweetを作ってみよう〜  
+https://note.mu/ysk1180/n/n584b6807e3fb
 
-* Ruby version
+## アイデアTweetとは 
+ランダムに表示される2つのキーワードからアイデアを発想し、画像付きでツイートできるサービス  
+https://ideatweet.herokuapp.com/
 
-* System dependencies
+## バージョン
+Ruby：2.5.1  
+Rails：5.2.0  
+PostgreSQL：10.1
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 作者
+@ysk1180
